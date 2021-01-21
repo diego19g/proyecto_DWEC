@@ -31,6 +31,7 @@
   <header class="mb-auto">
     <div>
       <h3 class="float-md-start mb-0">Inicio</h3>
+      <h4 class="float-md-start mb-0" style="margin-left: 10%;">Tiempo para el próximo cambio de artículos:<span id="contador"></span></h4>
       <nav class="nav nav-masthead justify-content-center float-md-end">
         <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
         <a class="nav-link" href="catalogo.html">Catálogo</a>
@@ -52,5 +53,41 @@
   </footer>
 </div>
     
+
+  <script>
+        var fecha_actual = new Date();
+    var mes=fecha_actual.getMonth();
+    var anyo=fecha_actual.getFullYear();
+    var mes_siguiente=mes+1;
+    var dia1=1;
+    if(mes==11){
+      mes_siguiente=0;
+      anyo=anyo+1;
+    }
+    var fin_mes = new Date(anyo,mes_siguiente,dia1);
+    
+
+    var milisegundos = Math.abs(fin_mes.getTime() - fecha_actual.getTime());
+
+    const msMinuto = 1000 * 60;
+    const msHora = msMinuto * 60;
+    const msDia = msHora * 24;
+
+    var dias = Math.floor(milisegundos/msDia);
+    milisegundos = milisegundos - dias*msDia;
+
+    var horas = Math.floor(milisegundos/msHora);
+    milisegundos = milisegundos - horas*msHora;
+
+    var minutos = Math.floor(milisegundos/msMinuto);
+    milisegundos = milisegundos - minutos*msMinuto;
+
+    var segundos = Math.floor(milisegundos/1000);
+
+    var contador=" "+dias+"d "+horas+"h "+minutos+"m "+segundos+"s";
+
+    document.getElementById("contador").innerHTML=contador;
+  </script>
+
   </body>
 </html>
