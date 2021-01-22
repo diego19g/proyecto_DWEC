@@ -1,2 +1,1 @@
-hacer cuenta atras para el fin de mes
-devolver articulos del carrito a fuera
+hacer que al quitar articulos se reste del precio
