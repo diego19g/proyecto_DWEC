@@ -48,21 +48,21 @@
 
         <h2>Bandeja de comida para botella</h2>
         <p>En esta bandeja podrás posar tu comida sin tener que tener en una mano la botella y en la otra la comida.</p>
-        <p><a class="btn btn-secondary fw-bold border-white bg-white" href="comprar.html" role="button">Comprar &raquo;</a></p>
+        <p><a class="btn btn-secondary fw-bold border-white bg-white" href="comprar.html" role="button">2,5€ Comprar &raquo;</a></p>
       </div>
       <div class="col-lg-4">
         <img src="img/bici.png" width="150px" height="150px">
 
         <h2>Bicicleta con silla para niños</h2>
         <p>Sal a hacer deporte con tu bicicleta a la vez que llevas a tus hijos contigo.</p>
-        <p><a class="btn btn-secondary fw-bold border-white bg-white" href="comprar.html" role="button">Comprar &raquo;</a></p>
+        <p><a class="btn btn-secondary fw-bold border-white bg-white" href="comprar.html" role="button">40€ Comprar &raquo;</a></p>
       </div>
       <div class="col-lg-4">
         <img src="img/escobilla.png" width="150px" height="150px">
 
         <h2>Escobilla Donald Trump</h2>
         <p>Divertida escobilla con forma de Donald Trump.</p>
-        <p><a class="btn btn-secondary fw-bold border-white bg-white" href="comprar.html" role="button">Comprar &raquo;</a></p>
+        <p><a class="btn btn-secondary fw-bold border-white bg-white" href="comprar.html" role="button">3€ Comprar &raquo;</a></p>
       </div>
     </div>
     <div class="row">
@@ -71,21 +71,21 @@
 
         <h2>Altavoz de robot</h2>
         <p>Altavoz bluethoot con aspecto de robot con múltiples funciones..</p>
-        <p><a class="btn btn-secondary fw-bold border-white bg-white" href="comprar.html" role="button">Comprar &raquo;</a></p>
+        <p><a class="btn btn-secondary fw-bold border-white bg-white" href="comprar.html" role="button">12€ Comprar &raquo;</a></p>
       </div>
       <div class="col-lg-4">
         <img src="img/papelera.png" width="150px" height="150px">
 
         <h2>Papelera con canasta</h2>
         <p>Intenta encestar cada vez que tengas que tirar un papel a la papelera.</p>
-        <p><a class="btn btn-secondary fw-bold border-white bg-white" href=comprar.html" role="button">Comprar &raquo;</a></p>
+        <p><a class="btn btn-secondary fw-bold border-white bg-white" href=comprar.html" role="button">3€ Comprar &raquo;</a></p>
       </div>
       <div class="col-lg-4">
         <img src="img/zapatillas.png" width="150px" height="150px">
 
         <h2>Zapatillas pescao</h2>
         <p>Cómodas y divertidas zapatillas con forma de pez para estar por casa.</p>
-        <p><a class="btn btn-secondary fw-bold border-white bg-white" href="comprar.html" role="button">Comprar &raquo;</a></p>
+        <p><a class="btn btn-secondary fw-bold border-white bg-white" href="comprar.html" role="button">7€ Comprar &raquo;</a></p>
       </div>
     </div>
   </main>
@@ -97,38 +97,46 @@
 
 
   <script>
-    var fecha_actual = new Date();
-    var mes=fecha_actual.getMonth();
-    var anyo=fecha_actual.getFullYear();
-    var mes_siguiente=mes+1;
-    var dia1=1;
-    if(mes==11){
-      mes_siguiente=0;
-      anyo=anyo+1;
-    }
-    var fin_mes = new Date(anyo,mes_siguiente,dia1);
-    
+      var cuenta_atras;
 
-    var milisegundos = Math.abs(fin_mes.getTime() - fecha_actual.getTime());
+      cuenta_atras=setInterval(
+        function(){
+          var fecha_actual = new Date();
+          var mes=fecha_actual.getMonth();
+          var anyo=fecha_actual.getFullYear();
+          var mes_siguiente=mes+1;
+          var dia1=1;
 
-    const milisegundos_minuto = 1000 * 60;
-    const milisegundos_hora = milisegundos_minuto * 60;
-    const milisegundos_dia = milisegundos_hora * 24;
+          if(mes==11){
+            mes_siguiente=0;
+            anyo=anyo+1;
+          }
 
-    var dias = Math.floor(milisegundos/milisegundos_dia);
-    milisegundos = milisegundos - dias*milisegundos_dia;
+          var fin_mes = new Date(anyo,mes_siguiente,dia1);    
 
-    var horas = Math.floor(milisegundos/milisegundos_hora);
-    milisegundos = milisegundos - horas*milisegundos_hora;
+          var milisegundos = Math.abs(fin_mes.getTime() - fecha_actual.getTime());
 
-    var minutos = Math.floor(milisegundos/milisegundos_minuto);
-    milisegundos = milisegundos - minutos*milisegundos_minuto;
+          const milisegundos_minuto = 1000 * 60;
+          const milisegundos_hora = milisegundos_minuto * 60;
+          const milisegundos_dia = milisegundos_hora * 24;
 
-    var segundos = Math.floor(milisegundos/1000);
+          var dias = Math.floor(milisegundos/milisegundos_dia);
+          milisegundos = milisegundos - dias*milisegundos_dia;
 
-    var contador=" "+dias+"d "+horas+"h "+minutos+"m "+segundos+"s";
+          var horas = Math.floor(milisegundos/milisegundos_hora);
+          milisegundos = milisegundos - horas*milisegundos_hora;
 
-    document.getElementById("contador").innerHTML=contador;
+          var minutos = Math.floor(milisegundos/milisegundos_minuto);
+          milisegundos = milisegundos - minutos*milisegundos_minuto;
+
+          var segundos = Math.floor(milisegundos/1000);
+
+          var contador=" "+dias+"d "+horas+"h "+minutos+"m "+segundos+"s";
+
+          document.getElementById("contador").innerHTML=contador;  
+        }
+
+      ,1000);
 
   </script>
     
