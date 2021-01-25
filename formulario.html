@@ -40,17 +40,17 @@
             <h3>Rellene sus datos para realizar la compra</h3>
             <form>
                 Nombre:
-                <input type="text" pattern="^[a-zA-Z\s]+$" title="Nombre incorrecto" required="required" style="margin: 15px;"><br>
+                <input type="text" id="nombre" required="required" style="margin: 15px;"><br>
                 Apellidos:
-                <input type="text" pattern="^[a-zA-Z\s]+$" title="Apellidos incorrectos" required="required" style="margin: 15px;"><br>
+                <input type="text" id="apellidos" required="required" style="margin: 15px;"><br>
                 DNI:
-                <input type="text" pattern="^\d{8}[A-Z]$" title="DNI incorrecto" required="required" style="margin: 15px;"><br> 
+                <input type="text" id="dni" required="required" style="margin: 15px;"><br> 
                 Fecha de nacimiento:
-                <input type="date" id="fecha" name="fecha" required="required" style="margin: 15px;"/><br>
+                <input type="date" style="margin: 15px;"/><br>
                 Población:
-                <input type="text" pattern="^[a-zA-Z\s]+$" title="Población incorrecta" required="required" style="margin: 15px;">
+                <input type="text" id="poblacion" required="required" style="margin: 15px;">
                 Calle:
-                <input type="text" pattern="^[a-zA-Z\s]+$" title="Calle incorrecta" required="required" style="margin: 15px;">
+                <input type="text" id="calle" required="required" style="margin: 15px;">
                 Número:
                 <input type="number" required="required" style="margin: 15px;"><br>
                 Provincia:
@@ -109,9 +109,9 @@
                     <option value='zaragoza'>Zaragoza</option>
                 </select><br>
                 Teléfono:
-                <input type="text" pattern="^(6|9)\d{8}$" title="Télefono incorrecto" required="required" style="margin: 15px;"/><br>
+                <input type="text" id="telefono" required="required" style="margin: 15px;"/><br>
                 Email:
-                <input type="email" pattern="^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$" title="Email incorrecto" required="required" style="margin: 15px;"/><br>
+                <input type="email" id="email" required="required" style="margin: 15px;"/><br>
                 <input type="submit" value="Enviar" style="margin: 15px;" onclick="comprar()"/>
             </form>
         </main>
@@ -122,9 +122,39 @@
       </div>
 
       <script>
-          function comprar(){
-            location.href = "comprar.html"; 
+        var error = "";
+    
+        function comprar() {
+          error = "";
+
+          pasaTest(/^[a-zA-Z\s]+$/,"nombre");
+          pasaTest(/^[a-zA-Z\s]+$/,"apellidos");
+          pasaTest(/^\d{8}[A-Z]$/,"dni");
+          pasaTest(/^[a-zA-Z\s]+$/,"poblacion");
+          pasaTest(/^[a-zA-Z\s]+$/,"calle");
+          pasaTest(/^(6|9)\d{8}$/,"telefono");
+          pasaTest(/^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/,"email");
+
+          if(error!=""){
+            alert(error);
+          }else{
+            location.href="comprar.html";
           }
+      
+        }
+
+
+        
+        function pasaTest(expresion,campo) {
+          var dato = document.getElementById(campo).value;
+          if(!expresion.test(dato)) {
+            error += "\u25cf\u0020Error en el campo " + campo + "\n";
+            document.getElementById(campo).value = "";
+            document.getElementById(campo).style.backgroundColor="red";
+          } 
+        }
+
+
         var cuenta_atras;
   
         cuenta_atras=setInterval(
