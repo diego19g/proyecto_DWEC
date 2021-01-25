@@ -1,1 +1,1 @@
-hacer que al quitar articulos se reste del precio
+al enviar formulario que lo compruebe antes, mirar apuntes

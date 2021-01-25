@@ -4,83 +4,168 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
+    <link href="css/inicio.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+  
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+      </style>
 </head>
-<body>
-    <form>
-        Nombre:
-        <input type="text" pattern="^[a-zA-Z\s]+$" title="Nombre incorrecto" required="required"><br>
-        Apellidos:
-        <input type="text" pattern="^[a-zA-Z\s]+$" title="Apellidos incorrectos" required="required"><br>
-        DNI:
-        <input type="text" pattern="^\d{8}[A-Z]$" title="DNI incorrecto" required="required"><br> 
-        Fecha de nacimiento:
-        <input type="date" id="fecha" name="fecha" required="required"/><br>
-        Población:
-        <input type="text" pattern="^[a-zA-Z\s]+$" title="Población incorrecta" required="required">
-        Calle:
-        <input type="text" pattern="^[a-zA-Z\s]+$" title="Calle incorrecta" required="required">
-        Número:
-        <input type="number" required="required"><br>
-        Provincia:
-        <select id="provincias">
-            <option value='alava'>Álava</option>
-            <option value='albacete'>Albacete</option>
-            <option value='alicante'>Alicante</option>
-            <option value='almeria'>Almería</option>
-            <option value='asturias'>Asturias</option>
-            <option value='avila'>Ávila</option>
-            <option value='badajoz'>Badajoz</option>
-            <option value='barcelona'>Barcelona</option>
-            <option value='burgos'>Burgos</option>
-            <option value='caceres'>Cáceres</option>
-            <option value='cadiz'>Cádiz</option>
-            <option value='cantabria'>Cantabria</option>
-            <option value='castellon'>Castellón</option>
-            <option value='ceuta'>Ceuta</option>
-            <option value='ciudadreal'>Ciudad Real</option>
-            <option value='cordoba'>Córdoba</option>
-            <option value='cuenca'>Cuenca</option>
-            <option value='girona'>Girona</option>
-            <option value='laspalmas'>Las Palmas</option>
-            <option value='granada'>Granada</option>
-            <option value='guadalajara'>Guadalajara</option>
-            <option value='guipuzcoa'>Guipúzcoa</option>
-            <option value='huelva'>Huelva</option>
-            <option value='huesca'>Huesca</option>
-            <option value='illesbalears'>Islas Baleares</option>
-            <option value='jaen'>Jaén</option>
-            <option value='acoruña'>A Coruña</option>
-            <option value='larioja'>La Rioja</option>
-            <option value='leon'>León</option>
-            <option value='lleida'>Lleida</option>
-            <option value='lugo'>Lugo</option>
-            <option value='madrid'>Madrid</option>
-            <option value='malaga'>Málaga</option>
-            <option value='melilla'>Melilla</option>
-            <option value='murcia'>Murcia</option>
-            <option value='navarra'>Navarra</option>
-            <option value='ourense'>Ourense</option>
-            <option value='palencia'>Palencia</option>
-            <option value='pontevedra'>Pontevedra</option>
-            <option value='salamanca'>Salamanca</option>
-            <option value='segovia'>Segovia</option>
-            <option value='sevilla'>Sevilla</option>
-            <option value='soria'>Soria</option>
-            <option value='tarragona'>Tarragona</option>
-            <option value='santacruztenerife'>Santa Cruz de Tenerife</option>
-            <option value='teruel'>Teruel</option>
-            <option value='toledo'>Toledo</option>
-            <option value='valencia'>Valencia</option>
-            <option value='valladolid'>Valladolid</option>
-            <option value='vizcaya'>Vizcaya</option>
-            <option value='zamora'>Zamora</option>
-            <option value='zaragoza'>Zaragoza</option>
-        </select><br>
-        Teléfono:
-        <input type="text" pattern="^(6|9)\d{8}$" title="Télefono incorrecto" required="required"/><br>
-        Email:
-        <input type="email" pattern="^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$" title="Email incorrecto" required="required" /><br>
-        <input type="submit" value="Enviar" />
-    </form>
+<body class="d-flex h-100 text-center text-white bg-dark" style="background-image: url(img/fondo.png);">
+    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+          <div>
+            <h3 class="float-md-start mb-0">Catálogo</h3>
+            <h4 class="float-md-start mb-0" style="margin-left: 10%;">Tiempo para el próximo cambio de artículos:<span id="contador"></span></h4>
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+              <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
+              <a class="nav-link" href="catalogo.html">Catálogo</a>
+              <a class="nav-link active" href="comprar.html">Comprar</a>
+            </nav>
+          </div>
+        </header>
+      
+        <main style="height: 100%;width: 100%;margin-top: 50px;">
+            <h3>Rellene sus datos para realizar la compra</h3>
+            <form>
+                Nombre:
+                <input type="text" pattern="^[a-zA-Z\s]+$" title="Nombre incorrecto" required="required" style="margin: 15px;"><br>
+                Apellidos:
+                <input type="text" pattern="^[a-zA-Z\s]+$" title="Apellidos incorrectos" required="required" style="margin: 15px;"><br>
+                DNI:
+                <input type="text" pattern="^\d{8}[A-Z]$" title="DNI incorrecto" required="required" style="margin: 15px;"><br> 
+                Fecha de nacimiento:
+                <input type="date" id="fecha" name="fecha" required="required" style="margin: 15px;"/><br>
+                Población:
+                <input type="text" pattern="^[a-zA-Z\s]+$" title="Población incorrecta" required="required" style="margin: 15px;">
+                Calle:
+                <input type="text" pattern="^[a-zA-Z\s]+$" title="Calle incorrecta" required="required" style="margin: 15px;">
+                Número:
+                <input type="number" required="required" style="margin: 15px;"><br>
+                Provincia:
+                <select id="provincias" style="margin: 15px;">
+                    <option value='alava'>Álava</option>
+                    <option value='albacete'>Albacete</option>
+                    <option value='alicante'>Alicante</option>
+                    <option value='almeria'>Almería</option>
+                    <option value='asturias'>Asturias</option>
+                    <option value='avila'>Ávila</option>
+                    <option value='badajoz'>Badajoz</option>
+                    <option value='barcelona'>Barcelona</option>
+                    <option value='burgos'>Burgos</option>
+                    <option value='caceres'>Cáceres</option>
+                    <option value='cadiz'>Cádiz</option>
+                    <option value='cantabria'>Cantabria</option>
+                    <option value='castellon'>Castellón</option>
+                    <option value='ceuta'>Ceuta</option>
+                    <option value='ciudadreal'>Ciudad Real</option>
+                    <option value='cordoba'>Córdoba</option>
+                    <option value='cuenca'>Cuenca</option>
+                    <option value='girona'>Girona</option>
+                    <option value='laspalmas'>Las Palmas</option>
+                    <option value='granada'>Granada</option>
+                    <option value='guadalajara'>Guadalajara</option>
+                    <option value='guipuzcoa'>Guipúzcoa</option>
+                    <option value='huelva'>Huelva</option>
+                    <option value='huesca'>Huesca</option>
+                    <option value='illesbalears'>Islas Baleares</option>
+                    <option value='jaen'>Jaén</option>
+                    <option value='acoruña'>A Coruña</option>
+                    <option value='larioja'>La Rioja</option>
+                    <option value='leon'>León</option>
+                    <option value='lleida'>Lleida</option>
+                    <option value='lugo'>Lugo</option>
+                    <option value='madrid'>Madrid</option>
+                    <option value='malaga'>Málaga</option>
+                    <option value='melilla'>Melilla</option>
+                    <option value='murcia'>Murcia</option>
+                    <option value='navarra'>Navarra</option>
+                    <option value='ourense'>Ourense</option>
+                    <option value='palencia'>Palencia</option>
+                    <option value='pontevedra'>Pontevedra</option>
+                    <option value='salamanca'>Salamanca</option>
+                    <option value='segovia'>Segovia</option>
+                    <option value='sevilla'>Sevilla</option>
+                    <option value='soria'>Soria</option>
+                    <option value='tarragona'>Tarragona</option>
+                    <option value='santacruztenerife'>Santa Cruz de Tenerife</option>
+                    <option value='teruel'>Teruel</option>
+                    <option value='toledo'>Toledo</option>
+                    <option value='valencia'>Valencia</option>
+                    <option value='valladolid'>Valladolid</option>
+                    <option value='vizcaya'>Vizcaya</option>
+                    <option value='zamora'>Zamora</option>
+                    <option value='zaragoza'>Zaragoza</option>
+                </select><br>
+                Teléfono:
+                <input type="text" pattern="^(6|9)\d{8}$" title="Télefono incorrecto" required="required" style="margin: 15px;"/><br>
+                Email:
+                <input type="email" pattern="^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$" title="Email incorrecto" required="required" style="margin: 15px;"/><br>
+                <input type="submit" value="Enviar" style="margin: 15px;" onclick="comprar()"/>
+            </form>
+        </main>
+      
+        <footer class="mt-auto text-white-50">
+          <p style="color: white;background-color: black;border-radius: 30px;">Tienda García, Calle El Muro, 19, Valladolid</p>
+        </footer>
+      </div>
+
+      <script>
+          function comprar(){
+            location.href = "comprar.html"; 
+          }
+        var cuenta_atras;
+  
+        cuenta_atras=setInterval(
+          function(){
+            var fecha_actual = new Date();
+            var mes=fecha_actual.getMonth();
+            var anyo=fecha_actual.getFullYear();
+            var mes_siguiente=mes+1;
+            var dia1=1;
+  
+            if(mes==11){
+              mes_siguiente=0;
+              anyo=anyo+1;
+            }
+  
+            var fin_mes = new Date(anyo,mes_siguiente,dia1);    
+  
+            var milisegundos = Math.abs(fin_mes.getTime() - fecha_actual.getTime());
+  
+            const milisegundos_minuto = 1000 * 60;
+            const milisegundos_hora = milisegundos_minuto * 60;
+            const milisegundos_dia = milisegundos_hora * 24;
+  
+            var dias = Math.floor(milisegundos/milisegundos_dia);
+            milisegundos = milisegundos - dias*milisegundos_dia;
+  
+            var horas = Math.floor(milisegundos/milisegundos_hora);
+            milisegundos = milisegundos - horas*milisegundos_hora;
+  
+            var minutos = Math.floor(milisegundos/milisegundos_minuto);
+            milisegundos = milisegundos - minutos*milisegundos_minuto;
+  
+            var segundos = Math.floor(milisegundos/1000);
+  
+            var contador=" "+dias+"d "+horas+"h "+minutos+"m "+segundos+"s";
+  
+            document.getElementById("contador").innerHTML=contador;  
+          }
+  
+        ,1000);
+  
+    </script>
 </body>
 </html>
