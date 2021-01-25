@@ -42,7 +42,7 @@
   <h3>Arrastra los artículos que desees de los disponibles este mes al carrito</h3>
   <main style="display: flex;">
     
-    <div id="origen" style="width: 400px; height: 100%; margin-left: 15%;" ondragover="fase2(event);" ondrop="fase3(event);">
+    <div id="origen" style="width: 400px; height: 100%; margin-left: 15%;" ondragover="fase2(event);" ondrop="fase3_restar(event);">
         <img src="img/comida.png" width="150px" height="150px" id="comida" name="2" draggable="true" ondragstart="fase1(event);">
         <img src="img/bici.png" width="150px" height="150px" id="bici" name="40" draggable="true" ondragstart="fase1(event);">
         <img src="img/escobilla.png" width="150px" height="150px" id="escobilla" name="3" draggable="true" ondragstart="fase1(event);">
@@ -55,7 +55,7 @@
             <h4>MI CARRITO</h4>
             <svg style="color: black;" xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 0 24 24" width="30"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
         </div>
-        <div id="destino" ondragover="fase2(event);" ondrop="fase3(event);" style="width: 100%; height: 70%;">
+        <div id="destino" ondragover="fase2(event);" ondrop="fase3_comprar(event);" style="width: 100%; height: 70%;">
         </div>
         <div style="width: 100%; height: 15%; background-color: gray;">
             <h3>PRECIO TOTAL:</h3>
@@ -82,7 +82,7 @@
 			}
 
 
-			function fase3(pEvento){
+			function fase3_comprar(pEvento){
 				pEvento.preventDefault();
 				var datos = pEvento.dataTransfer.getData("");
         pEvento.target.appendChild(document.getElementById(datos));
@@ -94,6 +94,21 @@
         aux=document.getElementById(datos).name;
         aux=parseInt(aux, 10);
         precio=precio+aux+"€";
+        document.getElementById("precio").innerHTML=precio;
+      }
+
+      function fase3_restar(pEvento){
+				pEvento.preventDefault();
+				var datos = pEvento.dataTransfer.getData("");
+        pEvento.target.appendChild(document.getElementById(datos));
+        
+        precio=document.getElementById("precio").innerHTML;        
+        precio=parseInt(precio,10);
+
+        var aux;
+        aux=document.getElementById(datos).name;
+        aux=parseInt(aux, 10);
+        precio=precio-aux+"€";
         document.getElementById("precio").innerHTML=precio;
       }
       
