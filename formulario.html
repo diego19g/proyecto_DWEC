@@ -43,10 +43,8 @@
                 <input type="text" id="nombre" required="required" style="margin: 15px;"><br>
                 Apellidos:
                 <input type="text" id="apellidos" required="required" style="margin: 15px;"><br>
-                DNI:
-                <input type="text" id="dni" required="required" style="margin: 15px;"><br> 
                 Fecha de nacimiento:
-                <input type="date" style="margin: 15px;"/><br>
+                <input type="date" id="fecha" style="margin: 15px;"/><br>
                 Población:
                 <input type="text" id="poblacion" required="required" style="margin: 15px;">
                 Calle:
@@ -112,8 +110,11 @@
                 <input type="text" id="telefono" required="required" style="margin: 15px;"/><br>
                 Email:
                 <input type="email" id="email" required="required" style="margin: 15px;"/><br>
+
+                <input type="checkbox" id="recordar" name="recordar" />Recordar mis datos<br><br>
+
                 <input type="submit" value="Comprobar" style="margin: 15px;" onclick="comprobar()"/>
-                <input type="submit" value="Enviar" style="margin: 15px;" onclick="enviar()"/>
+                <input type="submit" value="Enviar" style="margin: 15px;" onclick="enviar()" />
             </form>
         </main>
       
@@ -123,6 +124,8 @@
       </div>
 
       <script>
+
+
         var error = "";
     
         function comprobar() {
@@ -130,7 +133,6 @@
 
           pasaTest(/^[a-zA-Z\s]+$/,"nombre");
           pasaTest(/^[a-zA-Z\s]+$/,"apellidos");
-          pasaTest(/^\d{8}[A-Z]$/,"dni");
           pasaTest(/^[a-zA-Z\s]+$/,"poblacion");
           pasaTest(/^[a-zA-Z\s]+$/,"calle");
           pasaTest(/^(6|9)\d{8}$/,"telefono");
@@ -138,12 +140,33 @@
 
           if(error!=""){
             alert(error);
-          }          
-     
+          }
         }
 
+        var recordar;
+  
+        recordar=setInterval(
+          function(){
+
+            
+          }
+          ,1000);
+
         function enviar(){
-          location.href="comprar.html"; 
+          if(document.getElementById("recordar").checked){
+              var fecha = new Date();
+              fecha.setTime(fecha.getTime() + (5*24*60*60*1000));
+              var expires = "expires="+ fecha.toUTCString();
+              var claves=["nombre","apellidos","fecha","poblacion","calle","telefono","email"];
+
+              for(var i=0;i<claves.length;i++){
+                clave=claves[i];
+                valor=document.getElementById(clave).value;
+                miCookie = clave + "=" + valor + ";" + expires;
+                document.cookie = miCookie;
+              }
+          }
+          location.href="comprar.html";             
         }
 
         
@@ -153,7 +176,10 @@
             error += "\u25cf\u0020Error en el campo " + campo + "\n";
             document.getElementById(campo).value = "";
             document.getElementById(campo).style.backgroundColor="red";
-          }
+          }else {
+            document.getElementById(campo).style.backgroundColor="white";
+            document.getElementById(campo).disabled = true;
+				  }
         }
 
 
