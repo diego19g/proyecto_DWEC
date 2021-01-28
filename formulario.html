@@ -131,26 +131,18 @@
         function comprobar() {
           error = "";
 
-          pasaTest(/^[a-zA-Z\s]+$/,"nombre");
-          pasaTest(/^[a-zA-Z\s]+$/,"apellidos");
-          pasaTest(/^[a-zA-Z\s]+$/,"poblacion");
-          pasaTest(/^[a-zA-Z\s]+$/,"calle");
-          pasaTest(/^(6|9)\d{8}$/,"telefono");
-          pasaTest(/^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/,"email");
+          expReg(/^[a-zA-Z\s]+$/,"nombre");
+          expReg(/^[a-zA-Z\s]+$/,"apellidos");
+          expReg(/^[a-zA-Z\s]+$/,"poblacion");
+          expReg(/^[a-zA-Z\s]+$/,"calle");
+          expReg(/^(6|9)\d{8}$/,"telefono");
+          expReg(/^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/,"email");
 
           if(error!=""){
             alert(error);
           }
         }
 
-        var recordar;
-  
-        recordar=setInterval(
-          function(){
-
-            
-          }
-          ,1000);
 
         function enviar(){
           if(document.getElementById("recordar").checked){
@@ -170,15 +162,15 @@
         }
 
         
-        function pasaTest(expresion,campo) {
-          var dato = document.getElementById(campo).value;
-          if(!expresion.test(dato)) {
-            error += "\u25cf\u0020Error en el campo " + campo + "\n";
-            document.getElementById(campo).value = "";
-            document.getElementById(campo).style.backgroundColor="red";
+        function expReg(expreg,id) {
+          var dato = document.getElementById(id).value;
+          if(!expreg.test(dato)) {
+            error += "\u25cf\u0020Error en el campo " + id + "\n";
+            document.getElementById(id).value = "";
+            document.getElementById(id).style.backgroundColor="red";
           }else {
-            document.getElementById(campo).style.backgroundColor="white";
-            document.getElementById(campo).disabled = true;
+            document.getElementById(id).style.backgroundColor="white";
+            document.getElementById(id).disabled = true;
 				  }
         }
 
