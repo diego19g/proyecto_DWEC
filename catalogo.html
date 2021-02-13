@@ -4,6 +4,7 @@
     <title>Catálogo</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="recursos/jquery-3.5.1.js"></script>
 
     <style>
       .bd-placeholder-img {
@@ -44,7 +45,7 @@
   <main style="margin-top: 50px; margin-bottom: 50px;">
     <div class="row">
       <div class="col-lg-4">
-        <img src="img/comida.png" width="150px" height="150px">
+        <div><img src="img/comida.png" width="150px" height="150px"></div>
 
         <h2>Bandeja de comida para botella</h2>
         <p>En esta bandeja podrás posar tu comida sin tener que tener en una mano la botella y en la otra la comida.</p>
@@ -97,6 +98,49 @@
 
 
   <script>
+    $(function(){      
+      if (window.indexedDB) {										
+					peticion = window.indexedDB.open("almacen");																		
+					
+					peticion.onsuccess =  function (evento) {				
+						console.log("EVENTO: success\nSe ha abierto correctamente la base de datos: " + peticion.result.name + " con versión " + peticion.result.version);											
+
+            bd = peticion.result;
+
+            var transaccion = bd.transaction(bd.objectStoreNames, "readwrite");											
+            
+            almacenArticulos = transaccion.objectStore("articulos"); 
+            almacenArticulos.put({nombre:"bandeja",precio:2});
+            almacenArticulos.put({nombre:"bicicleta",precio:40});
+            almacenArticulos.put({nombre:"escobilla",precio:3});
+            almacenArticulos.put({nombre:"altavoz",precio:12});
+            almacenArticulos.put({nombre:"papelera",precio:3});
+            almacenArticulos.put({nombre:"zapatillas",precio:7});
+					};
+
+					peticion.onerror = function (evento) {						
+						console.log("EVENTO: error\nNo se ha abierto la base de datos");
+					};
+
+					peticion.onupgradeneeded = function (evento) {			
+						console.log("EVENTO: upgradedneeded\nSe modifica la versión o es nueva");
+
+            bd = peticion.result;
+				
+						almacenArticulos = bd.createObjectStore("articulos", {keyPath:"nombre"});
+    
+					};
+							
+					peticion.onblocked = function (evento) {
+						
+						console.log("EVENTO: blocked\nBase de datos bloqueada");
+					};
+		
+				} else {
+					console.log("IndexedDB no está soportado");
+				}
+    });
+
       var cuenta_atras;
 
       cuenta_atras=setInterval(
