@@ -6,6 +6,7 @@
     <title>Formulario</title>
     <link href="css/inicio.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="recursos/jquery-3.5.1.js"></script>
     <style>
         .bd-placeholder-img {
           font-size: 1.125rem;
@@ -14,7 +15,10 @@
           -moz-user-select: none;
           user-select: none;
         }
-  
+        #comprobar,#continuar{
+          color: black;
+          margin-bottom: 10px;
+        }
         @media (min-width: 768px) {
           .bd-placeholder-img-lg {
             font-size: 3.5rem;
@@ -38,7 +42,7 @@
       
         <main style="height: 100%;width: 100%;margin-top: 50px;">
             <h3>Rellene sus datos para realizar la compra</h3>
-            <form>
+            <form action="formulario.html">
                 Nombre:
                 <input type="text" id="nombre" required="required" style="margin: 15px;"><br>
                 Apellidos:
@@ -113,7 +117,8 @@
 
                 <input type="checkbox" id="recordar" name="recordar" />Recordar mis datos<br><br>
    
-                <input type="submit" value="Enviar" style="margin: 15px;" onclick="enviar()" />
+                <button class="btn btn-secondary fw-bold border-white bg-white" id="comprobar">COMPROBAR</button>
+                <p><a class="btn btn-secondary fw-bold border-white bg-white" id="continuar" href="datos.html" role="button">CONTINUAR</a></p>
             </form>
         </main>
       
@@ -123,49 +128,64 @@
       </div>
 
       <script>
+        $(function(){              
+          $("#comprobar").click(function(){
+            error = "";
+	
+            expReg(/^[a-zA-Z\s]+$/,"nombre");
+            expReg(/^[a-zA-Z\s]+$/,"apellidos");
+            expReg(/^[a-zA-Z\s]+$/,"poblacion");
+            expReg(/^[a-zA-Z\s]+$/,"calle");    
+            expReg(/^(6|9)\d{8}$/,"telefono");
+            expReg(/^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/,"email");
 
+            if(error!=""){
+              alert(error);
+            }else{                            
+              var datos = {};
 
-        var error = "";
-    
-        function enviar() {
-          error = "";
+              datos.nombre = document.getElementById("nombre").value;              
+              datos.apellidos = document.getElementById("apellidos").value;              
+              datos.poblacion = document.getElementById("poblacion").value;                    
+              datos.calle = document.getElementById("calle").value;
+              datos.telefono = document.getElementById("telefono").value;
+              datos.email = document.getElementById("email").value;                 
 
-          expReg(/^[a-zA-Z\s]+$/,"nombre");
-          expReg(/^[a-zA-Z\s]+$/,"apellidos");
-          expReg(/^[a-zA-Z\s]+$/,"poblacion");
-          expReg(/^[a-zA-Z\s]+$/,"calle");
-          expReg(/^(6|9)\d{8}$/,"telefono");
-          expReg(/^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/,"email");
+              var datosUsuario = JSON.stringify(datos);
+              localStorage.setItem("datos",datosUsuario);
 
-          if(error!=""){
-            alert(error);
-          }else{
-            if(document.getElementById("recordar").checked){
-              var fecha = new Date();
-              fecha.setTime(fecha.getTime() + (5*24*60*60*1000));
-              var expires = "expires="+ fecha.toUTCString();
-              var claves=["nombre","apellidos","fecha","poblacion","calle","telefono","email"];
+              if(document.getElementById("recordar").checked){
+                  var fecha = new Date();
+                  fecha.setTime(fecha.getTime() + (5*24*60*60*1000));
+                  var expires = "expires="+ fecha.toUTCString();
+                  var claves=["nombre","apellidos","poblacion","calle","telefono","email"];
 
-              for(var i=0;i<claves.length;i++){
-                clave=claves[i];
-                valor=document.getElementById(clave).value;
-                miCookie = clave + "=" + valor + ";" + expires;
-                document.cookie = miCookie;
-              }
-            }
-            location.href="comprar.html";  
-          }
-        }
-       
+                  for(var i=0;i<claves.length;i++){
+                      clave=claves[i];
+                      valor=document.getElementById(clave).value;
+                      miCookie = clave + "=" + valor + ";" + expires;
+                      document.cookie = miCookie;
+                  }          
+                  alert("DATOS CORRECTOS Y GUARDADOS, HAGA CLICK EN CONTINUAR");
+              }else{
+                alert("DATOS CORRECTOS, HAGA CLICK EN CONTINUAR");
+              }              
+            }				 
+          });
+
+          
+         
+        });
+                   
         function expReg(expreg,id) {
           var dato = document.getElementById(id).value;
-          if(!expreg.test(dato)) {
+          if(!expreg.test(dato)) {         
             error += "\u25cf\u0020Error en el campo " + id + "\n";
-            document.getElementById(id).value = "";
-            document.getElementById(id).style.backgroundColor="red";
+					  document.getElementById(id).value = "";
+					  document.getElementById(id).style.backgroundColor="red";              
           }else {
             document.getElementById(id).style.backgroundColor="white";
-            document.getElementById(id).disabled = true;
+            document.getElementById(id).disabled = true;          
 				  }
         }
 

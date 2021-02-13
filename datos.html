@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/inicio.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="recursos/jquery-3.5.1.js"></script>
+    <title>Document</title>
+    <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+  
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }       
+    </style>
+</head>
+<body class="d-flex h-100 text-center text-white bg-dark" style="background-image: url(img/fondo.png);">
+    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+          <div>
+            <h3 class="float-md-start mb-0">Catálogo</h3>
+            <h4 class="float-md-start mb-0" style="margin-left: 10%;">Tiempo para el próximo cambio de artículos:<span id="contador"></span></h4>
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+              <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
+              <a class="nav-link" href="catalogo.html">Catálogo</a>
+              <a class="nav-link active" href="formulario.html">Comprar</a>
+            </nav>
+          </div>
+        </header>
+      
+        <main style="height: 100%;width: 100%;margin-top: 50px;">
+            <h3>CONFIRME LOS DATOS SON LOS DESEADOS PARA REALIZAR LA COMPRA</h3>                        
+            <p id="datosUsuario"></p>
+            <button id="volver">VOLVER A RELLENAR LOS DATOS</button>
+            <button id="confirmar">CONFIRMAR</button>
+        </main>
+      
+        <footer class="mt-auto text-white-50">
+          <p style="color: white;background-color: black;border-radius: 30px;">Tienda García, Calle El Muro, 19, Valladolid</p>
+        </footer>
+      </div>
+
+      <script>
+        $(function(){
+            $("#volver").click(function(){
+                var listaCookies = document.cookie.split(';');
+				var clave = "";
+				for(i=0;i<listaCookies.length;i++) {
+					clave = listaCookies[i].split('=')[0].trim();
+					document.cookie = clave + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+				}
+                location.href="formulario.html";  
+            });
+            $("#confirmar").click(function(){                    
+                location.href="comprar.html";  
+            });
+          });        
+				
+            var datosJSON= localStorage.getItem("datos");
+		    localStorage.removeItem(datos);
+		    var datos = JSON.parse(datosJSON);
+	
+			var c = "";
+			c += "<br />Nombre: " + datos.nombre;
+			c += "<br />Apellidos: " + datos.apellidos;
+			c += "<br />Población: " + datos.poblacion;
+			c += "<br />Calle: " + datos.calle;
+			c += "<br />Teléfono: " + datos.telefono;
+			c += "<br />Email: " + datos.email;	
+	
+			document.getElementById("datosUsuario").innerHTML = c;			
+
+
+            var cuenta_atras;
+  
+        cuenta_atras=setInterval(
+          function(){
+            var fecha_actual = new Date();
+            var mes=fecha_actual.getMonth();
+            var anyo=fecha_actual.getFullYear();
+            var mes_siguiente=mes+1;
+            var dia1=1;
+  
+            if(mes==11){
+              mes_siguiente=0;
+              anyo=anyo+1;
+            }
+  
+            var fin_mes = new Date(anyo,mes_siguiente,dia1);    
+  
+            var milisegundos = Math.abs(fin_mes.getTime() - fecha_actual.getTime());
+  
+            const milisegundos_minuto = 1000 * 60;
+            const milisegundos_hora = milisegundos_minuto * 60;
+            const milisegundos_dia = milisegundos_hora * 24;
+  
+            var dias = Math.floor(milisegundos/milisegundos_dia);
+            milisegundos = milisegundos - dias*milisegundos_dia;
+  
+            var horas = Math.floor(milisegundos/milisegundos_hora);
+            milisegundos = milisegundos - horas*milisegundos_hora;
+  
+            var minutos = Math.floor(milisegundos/milisegundos_minuto);
+            milisegundos = milisegundos - minutos*milisegundos_minuto;
+  
+            var segundos = Math.floor(milisegundos/1000);
+  
+            var contador=" "+dias+"d "+horas+"h "+minutos+"m "+segundos+"s";
+  
+            document.getElementById("contador").innerHTML=contador;  
+          }
+  
+        ,1000);
+      </script>
+</body>
+</html>
