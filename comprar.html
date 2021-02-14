@@ -4,6 +4,7 @@
     <title>Comprar</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="recursos/jquery-3.5.1.js"></script>
 
     <style>
       .bd-placeholder-img {
@@ -59,18 +60,28 @@
         </div>
         <div style="width: 100%; height: 15%; background-color: gray;">
             <h3>PRECIO TOTAL:</h3>
-            <h3 id="precio">0<span>€</span></h3>
+            <h3 id="precio">0<span>€</span></h3>            
         </div>
-    </div>
+    </div>    
   </main>
 
   <footer class="mt-auto text-white-50">
-    <p style="color: white;background-color: black;border-radius: 30px;">Tienda García, Calle El Muro, 19, Valladolid</p>
+    <button class="btn btn-secondary fw-bold border-white bg-white" id="comprar">COMPRAR</button>
   </footer>
 </div>
     
 
     <script>
+      $(function(){
+        $("#comprar").click(function(){
+          $("#destino img").each(function(){
+            var c=$(this).attr("id");
+            var v=$(this).attr("name");
+            window.sessionStorage.setItem(c,v);            
+          });                      
+        });
+      });
+
 			function fase1(pEvento){
 				pEvento.dataTransfer.setData("", pEvento.target.id);
 				console.log(pEvento.target.id);
