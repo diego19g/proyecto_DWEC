@@ -54,11 +54,11 @@
         $(function(){
             $("#volver").click(function(){
                 var listaCookies = document.cookie.split(';');
-				var clave = "";
-				for(i=0;i<listaCookies.length;i++) {
-					clave = listaCookies[i].split('=')[0].trim();
-					document.cookie = clave + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-				}
+                var clave = "";
+                for(i=0;i<listaCookies.length;i++) {
+                  clave = listaCookies[i].split('=')[0].trim();
+                  document.cookie = clave + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+                }
                 location.href="formulario.html";  
             });
             $("#confirmar").click(function(){                    
