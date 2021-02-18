@@ -1,2 +1,0 @@
-que al comprobar el formulario no se borre si esta bien
-que me guarde las cookies y me lleve a la pagina de comprar
